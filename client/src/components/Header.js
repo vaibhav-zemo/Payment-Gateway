@@ -7,7 +7,7 @@ function Header() {
             <Content>
                 <Logo>
                     <img src='/images/Logo3.png' alt='' />
-                    <span>Name</span>
+                    <span>VAP NGO</span>
                 </Logo>
                 <Nav>
                     <NavListWrap>
@@ -72,6 +72,9 @@ const Logo = styled.div`
     }
     @media (max-width: 768px) {
         margin: auto;
+    }
+    &:hover{
+        color: lightgray;
     }
 `;
 
@@ -140,7 +143,7 @@ const NavList = styled.li`
     &:hover, &:active{
         a{
             span{
-                color: rgba(0,0,0,0.9);
+                color: lightgrey;
             }
         }
     }

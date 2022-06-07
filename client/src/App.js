@@ -7,11 +7,19 @@ import styled from 'styled-components'
 import "./App.css";
 
 function App() {
+  const [valueAmount, setValue] = useState("");
+
+
   const [book, setBook] = useState({
     name: "Donate",
     img: "https://images-na.ssl-images-amazon.com/images/I/817tHNcyAgL.jpg",
-    price: 250,
+    price: valueAmount,
   });
+
+  const reset = async (e) => {
+    setValue("");
+  }
+
 
   const initPayment = (data) => {
     const options = {
@@ -42,7 +50,7 @@ function App() {
   const handlePayment = async () => {
     try {
       const orderUrl = "http://localhost:8080/api/payment/orders";
-      const { data } = await axios.post(orderUrl, { amount: book.price });
+      const { data } = await axios.post(orderUrl, { amount: valueAmount });
       console.log(data);
       initPayment(data.data);
     } catch (error) {
@@ -57,7 +65,10 @@ function App() {
         <Container>
           <Makepayment>
             <h1>Make Your Payment</h1>
-            <Button onClick={handlePayment} className="buy_btn">
+            <div>
+              <input id="amount" value={valueAmount} type="number" onChange={(e) => setValue(e.target.value)} placeholder="Enter Amount to Donate"></input>
+            </div>
+            <Button onClick={(e) => {handlePayment(); reset(e)}}  className="buy_btn">
               Donate
             </Button>
           </Makepayment>
@@ -78,7 +89,7 @@ const Background = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     @media (max-width: 768px) {
         background-size: cover;
     }
@@ -113,6 +124,22 @@ const Makepayment = styled.div`
         justify-content: center;
         margin: auto;
         align-items: center;
+    }
+    input{
+      display: flex;
+      margin-top: 80px;
+      border:none;
+      border-radius: 12px;
+      width: 200px;
+      padding: 5px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 `;
 

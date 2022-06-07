@@ -13,7 +13,8 @@ function Footer() {
 
 const Container = styled.div`
     position: fixed;
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    background: transparent;
     width: 100vw;
     left: 0;
     right: 0;
@@ -26,6 +27,7 @@ const Container = styled.div`
 
 const Content = styled.div`
     margin-top: 10px;
+    color: #fff;
 `;
 
 export default Footer
